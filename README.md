@@ -1,23 +1,24 @@
 # FFmpeg-Android
 [ ![Download](https://api.bintray.com/packages/bravobit/Android-FFmpeg/android-ffmpeg/images/download.svg) ](https://bintray.com/bravobit/Android-FFmpeg/android-ffmpeg/_latestVersion)
 
-FFMpeg/FFprobe compiled for Android.
-Execute FFmpeg & FFprobe commands with ease in your Android project.
+FFMpeg 在 Android中使用.
+在您的Android项目中轻松执行FFmpeg命令。
 
-## About
-This project is a continued fork of [FFmpeg Android Java](https://github.com/WritingMinds/ffmpeg-android-java) by WritingMinds.
-This fork fixes the `CANNOT LINK EXECUTABLE ffmpeg: has text relocations` issue on x86 devices along with some other bugfixes, new features and the newest FFmpeg builds.
+## 关于
+这个项目是 [FFmpeg-Android](https://github.com/bravobit/FFmpeg-Android) 的延续分支。删除了FFprobe,
+使so包大小减少了一半
 
-### Architectures
-Bravobit FFmpeg-Android runs on the following architectures:
+
+### 体系结构
+FFmpeg-Android运行在以下架构上:
 - armv7
 - armv7-neon
 - armv8
 - x86
 - x86_64
 
-### FFmpeg build
-FFmpeg in this project was built with the following libraries:
+### FFmpeg构建
+在本项目中，FFmpeg是通过以下库构建的:
 - x264 `r2851 ba24899`
 - libpng `1.6.21`
 - freetype2 `2.8.1`
@@ -31,39 +32,38 @@ FFmpeg in this project was built with the following libraries:
 - expat `2.1.0`
 - fdk-aac `0.1.6`
 
-### Features
-- Uses the latest FFmpeg release `n4.0-39-gda39990`
-- Uses native CPU capabilities on ARM architectures
-- FFprobe is bundled in this library too
-- Enabled network capabilities
-- Multithreading
+### 特性
+- 使用最新的FFmpeg发行版 `n4.0-39-gda39990`
+- 在ARM架构上使用本机CPU功能
+- 启用网络功能
+- 多线程
 
-## Usage
+## 使用
 
-### Getting Started
-Include the dependency
+### 开始
+包括依赖
 ```gradle
 dependencies {
-    implementation 'nl.bravobit:android-ffmpeg:1.1.7'
+     implementation 'com.github.yangfeng1994:FFmpeg-Android:v1.0.0'
 }
 ```
 
-### Check if FFmpeg is supported
-To check whether FFmpeg is available on your device you can use the following method.
+### 检查是否支持FFmpeg
+要检查设备上是否有FFmpeg，可以使用以下方法。
 ```java
 if (FFmpeg.getInstance(this).isSupported()) {
-  // ffmpeg is supported
+  // 支持ffmpeg
 } else {
-  // ffmpeg is not supported
+  // 不支持ffmpeg
 }
 ```
-This is all you have to do to load the FFmpeg library.
+这就是加载FFmpeg库所要做的全部工作。
 
-### Run FFmpeg command
-In this sample code we will run the ffmpeg -version command.
+### 运行 FFmpeg command
+在这个示例代码中，我们将运行ffmpeg -version命令。
 ```java
 FFmpeg ffmpeg = FFmpeg.getInstance(context);
-  // to execute "ffmpeg -version" command you just need to pass "-version"
+  // 要执行“ffmpeg -version”命令，只需传递“-version”即可
 ffmpeg.execute(cmd, new ExecuteBinaryResponseHandler() {
 
     @Override
@@ -84,8 +84,8 @@ ffmpeg.execute(cmd, new ExecuteBinaryResponseHandler() {
 });
 ```
 
-### Stop (or Quit) the FFmpeg process
-If you want to stop the running FFmpeg process, simply call `.sendQuitSignal()` on the `FFtask` that is running:
+### 停止(或退出)FFmpeg进程
+如果你想停止运行中的ffmpeg, 只需在运行的FFtask上调用' .sendQuitSignal() '
 
 ```java
 FFmpeg ffmpeg = FFmpeg.getInstance(context);
@@ -94,43 +94,8 @@ FFtask ffTask = ffmpeg.execute( ... )
 ffTask.sendQuitSignal();
 ```
 
-_NOTE: This will result in `onFailure` being called instead of `onSuccess`._
+注意:这将导致' onFailure '被调用，而不是' onSuccess ' ._
 
-### Check if FFprobe is supported
-To check whether FFprobe is available on your device you can use the following method.
-```java
-if (FFprobe.getInstance(this).isSupported()) {
-  // ffprobe is supported
-} else {
-  // ffprobe is not supported
-}
-```
-This is all you have to do to load the FFprobe library.
-
-### Run FFprobe command
-In this sample code we will run the ffprobe -version command.
-```java
-FFprobe ffprobe = FFprobe.getInstance(context);
-// to execute "ffprobe -version" command you just need to pass "-version"
-ffprobe.execute(cmd, new ExecuteBinaryResponseHandler() {
-
-    @Override
-    public void onStart() {}
-
-    @Override
-    public void onProgress(String message) {}
-
-    @Override
-    public void onFailure(String message) {}
-
-    @Override
-    public void onSuccess(String message) {}
-
-    @Override
-    public void onFinish() {}
-
-});
-```
 
 ## Special Thanks To
 - [hiteshsondhi88](https://github.com/hiteshsondhi88)
