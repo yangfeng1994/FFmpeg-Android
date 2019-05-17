@@ -42,6 +42,18 @@ FFmpeg-Android运行在以下架构上:
 
 ### 开始
 包括依赖
+
+
+allprojects
+{
+
+	repositories {
+		...
+		maven { url 'https://www.jitpack.io' }
+		}
+
+	}
+
 ```gradle
 dependencies {
      implementation 'com.github.yangfeng1994:FFmpeg-Android:v1.0.0'
