@@ -9,6 +9,11 @@ FFMpeg 在 Android中使用.
 使so包大小减少了一半
 
 
+# 项目截图
+
+<img src="/sample/imgs/cmd.jpg" alt="图-2：cmd" width="320px"></img>
+<img src="/sample/imgs/ffmpeg_version.jpg" alt="图-1：ffmpeg_version" width="320px"></img>
+
 ### 体系结构
 FFmpeg-Android运行在以下架构上:
 - armv7
