@@ -1,5 +1,5 @@
 # FFmpeg-Android
-[ ![Download](1.0.1) ](https://github.com/yangfeng1994/FFmpeg-Android)
+[![](https://jitpack.io/v/yangfeng1994/FFmpeg-Android.svg)](https://jitpack.io/#yangfeng1994/FFmpeg-Android)
 
 FFMpeg 在 Android中使用.
 在您的Android项目中轻松执行FFmpeg命令。
@@ -11,8 +11,8 @@ FFMpeg 在 Android中使用.
 
 # 项目截图
 
-<img src="/sample/imgs/cmd.jpg" alt="图-2：cmd" width="320px"></img>
-<img src="/sample/imgs/ffmpeg_version.jpg" alt="图-1：ffmpeg_version" width="320px"></img>
+<img src="/sample/imgs/ffmpeg_version.jpg" alt="图-1：ffmpeg_version" width="380px"></img>
+<img src="/sample/imgs/cmd.jpg" alt="图-2：cmd" width="380px"></img>
 
 ### 体系结构
 FFmpeg-Android运行在以下架构上:
