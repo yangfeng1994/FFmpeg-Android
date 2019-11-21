@@ -1,5 +1,5 @@
 # FFmpeg-Android
-[ ![Download](https://api.bintray.com/packages/bravobit/Android-FFmpeg/android-ffmpeg/images/download.svg) ](https://bintray.com/bravobit/Android-FFmpeg/android-ffmpeg/_latestVersion)
+[ ![Download](1.0.1) ](https://github.com/yangfeng1994/FFmpeg-Android)
 
 FFMpeg 在 Android中使用.
 在您的Android项目中轻松执行FFmpeg命令。
@@ -14,8 +14,6 @@ FFmpeg-Android运行在以下架构上:
 - armv7
 - armv7-neon
 - armv8
-- x86
-- x86_64
 
 ### FFmpeg构建
 在本项目中，FFmpeg是通过以下库构建的:
@@ -56,7 +54,7 @@ allprojects
 
 ```gradle
 dependencies {
-     implementation 'com.github.yangfeng1994:FFmpeg-Android:v1.0.0'
+     implementation 'com.github.yangfeng1994:FFmpeg-Android:v1.0.1'
 }
 ```
 
@@ -110,7 +108,6 @@ ffTask.sendQuitSignal();
 
 
 ## Special Thanks To
-- [hiteshsondhi88](https://github.com/hiteshsondhi88)
 - [diegoperini](https://github.com/diegoperini)
 
 ## Licensing
