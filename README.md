@@ -1,12 +1,12 @@
 # FFmpeg-Android
 [![](https://jitpack.io/v/yangfeng1994/FFmpeg-Android.svg)](https://jitpack.io/#yangfeng1994/FFmpeg-Android)
-
+[![](https://img.shields.io/badge/FFmpeg-4.0-yellow.svg)](http://ffmpeg.org/releases/ffmpeg-4.0.tar.bz2)
 FFMpeg 在 Android中使用.
 在您的Android项目中轻松执行FFmpeg命令。
 
 ## 关于
 这个项目是 [FFmpeg-Android](https://github.com/bravobit/FFmpeg-Android) 的延续分支。删除了FFprobe,
-使so包大小减少了一半
+使so包大小减少了一半,尽量压缩项目的大小，使您的项目尽可能的小，功能尽可能的完善。
 
 
 # 项目截图
@@ -111,6 +111,9 @@ ffTask.sendQuitSignal();
 
 注意:这将导致' onFailure '被调用，而不是' onSuccess ' ._
 
+#体验demo
+
+[点击下载](https://github.com/yangfeng1994/FFmpeg-Android/tree/master/sample/release/sample-release.apk)
 
 ## Special Thanks To
 - [diegoperini](https://github.com/diegoperini)
