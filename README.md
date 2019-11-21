@@ -18,9 +18,10 @@ FFMpeg 在 Android中使用.
 
 ### 体系结构
 FFmpeg-Android运行在以下架构上:
-- armv7
+- armeabi
+- armeabi-v7a
 - armv7-neon
-- armv8
+- arm64-v8a
 
 ### FFmpeg构建
 在本项目中，FFmpeg是通过以下库构建的:
