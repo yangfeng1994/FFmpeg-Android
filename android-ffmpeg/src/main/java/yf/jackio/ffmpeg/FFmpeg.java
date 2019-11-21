@@ -3,6 +3,7 @@ package yf.jackio.ffmpeg;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.lang.reflect.Array;
 import java.util.Map;
 
 public class FFmpeg implements FFbinaryInterface {
-    private static final int VERSION = 17; // up this version when you add a new ffmpeg build
+    private static final int VERSION = Build.VERSION_CODES.JELLY_BEAN_MR1; // up this version when you add a new ffmpeg build
     private static final String KEY_PREF_VERSION = "ffmpeg_version";
 
     private final FFbinaryContextProvider context;

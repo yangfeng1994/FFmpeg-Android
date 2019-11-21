@@ -21,10 +21,10 @@ android {
 
     signingConfigs {
         config {
-            keyAlias 'mantu'
-            keyPassword '654321'
-            storeFile file('mantu_tools.jks')
-            storePassword '654321'
+            keyAlias 'ffmpeg'
+            keyPassword '123456'
+            storeFile file('ffmpeg_sign.jks')
+            storePassword '123456'
         }
     }
     buildTypes {
@@ -49,9 +49,6 @@ dependencies {
 
     // Android libraries
     implementation 'androidx.appcompat:appcompat:1.0.2'
-
-    // Misc
-    implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // FFmpeg project
     implementation project(':android-ffmpeg')
