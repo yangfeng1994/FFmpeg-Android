@@ -25,7 +25,7 @@ class Util {
             }
             return sb.toString();
         } catch (IOException e) {
-            Log.e("error converting input stream to string", e);
+            YLog.e("error converting input stream to string", e);
         }
         return null;
     }
@@ -35,7 +35,7 @@ class Util {
             try {
                 process.destroy();
             } catch (Exception e) {
-                Log.e("progress destroy error", e);
+                YLog.e("progress destroy error", e);
             }
         }
     }
@@ -78,16 +78,16 @@ class Util {
                 try {
                     readyToProceed = predicate.isReadyToProceed();
                 } catch (Exception e) {
-                    Log.v("Observing " + e.getMessage());
+                    YLog.v("Observing " + e.getMessage());
                     observer.postDelayed(this, 40);
                     return;
                 }
 
                 if (readyToProceed) {
-                    Log.v("Observed");
+                    YLog.v("Observed");
                     run.run();
                 } else {
-                    Log.v("Observing");
+                    YLog.v("Observing");
                     observer.postDelayed(this, 40);
                 }
             }

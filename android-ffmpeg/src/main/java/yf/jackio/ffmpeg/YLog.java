@@ -1,16 +1,16 @@
 package yf.jackio.ffmpeg;
 
-class Log {
+class YLog {
 
     private static String TAG = FFmpeg.class.getSimpleName();
     private static boolean DEBUG = false;
 
     public static void setDebug(boolean debug) {
-        Log.DEBUG = debug;
+        YLog.DEBUG = debug;
     }
 
     public static void setTag(String tag) {
-        Log.TAG = tag;
+        YLog.TAG = tag;
     }
 
     static void d(Object obj) {

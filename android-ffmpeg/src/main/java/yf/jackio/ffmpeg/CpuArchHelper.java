@@ -9,7 +9,7 @@ public class CpuArchHelper {
     public static final String ARM_V7_CPU = "armeabi-v7a";
 
     public static CpuArch getCpuArch() {
-        Log.d("Build.CPU_ABI : " + Build.CPU_ABI);
+        YLog.d("Build.CPU_ABI : " + Build.CPU_ABI);
 
         switch (Build.CPU_ABI) {
             case X86_CPU:
