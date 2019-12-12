@@ -7,8 +7,7 @@ FFMpeg 在 Android中使用.
 在您的Android项目中轻松执行FFmpeg命令。
 
 ## 关于
-这个项目是 [FFmpeg-Android](https://github.com/bravobit/FFmpeg-Android) 的延续分支。删除了FFprobe,
-使so包大小减少了一半,尽量压缩项目的大小，使您的项目尽可能的小，功能尽可能的完善。
+引入本项目使您的项目尽可能的小，功能尽可能的完善，已使用本项目上线的项目有 [影音坊](http://server.m.pp.cn/download/apk?appId=8061477&custom=0&ch_src=pp_dev&ch=default)。
 
 
 # 项目截图
