@@ -146,6 +146,14 @@ ffTask.sendQuitSignal();
 
 注意:这将导致' onFailure '方法被调用，而不是' onSuccess '
 
+####历史版本
+
+```
+    implementation 'com.github.yangfeng1994:FFmpeg-Android:v1.0.1'
+ 
+    implementation 'com.github.yangfeng1994:FFmpeg-Android:v1.0.0'
+    
+```
 # 体验demo
 
 [点击下载](https://raw.githubusercontent.com/yangfeng1994/FFmpeg-Android/master/sample/release/sample-release.apk)
