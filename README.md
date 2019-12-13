@@ -48,7 +48,7 @@ FFmpeg-Android运行在以下架构上:
 - 多线程
 
 ## 使用
-
+在项目的 build.gradle 中添加
 ```
 allprojects{
 
@@ -61,27 +61,43 @@ allprojects{
 
 ```
 
-gradle
+app 的 build.gradle 下添加
 
 ```
 dependencies {
      implementation 'com.github.yangfeng1994:FFmpeg-Android:v1.0.2'
 }
 ```
+
+
+设置支持的so库版本
+```
+android{
+        defaultConfig{
+         ndk {
+                    abiFilters 'armeabi-v7a', 'armeabi'     //过滤的so库版本
+                }
+        }
+}
+```
+
 #### 友情提示
 1.申请权限（对本地文件处理时，建议您务必申请权限，不然无法对音视频进行操作）
 2.对输入的文件是否存在，进行判断（如您想要输出的文件 已经在手机中存在，将无法对输出文件）
 ### 检查是否支持FFmpeg
 要检查设备上是否有FFmpeg，可以使用以下方法。
+
+##### java
+
+建议先在application中调用此方法（此方法为判断是否支持 ffmpeg 如果ffmpeg so库没有正常加载，可以写入到您的手机缓存中）
+
 ``` 
-java
 if (FFmpeg.getInstance(this).isSupported()) {
   // 支持ffmpeg
 } else {
   // 不支持ffmpeg
 }
 ```
-这就是加载FFmpeg库所要做的全部工作。
 
 ### 运行 FFmpeg command
 在这个示例代码中，我们将运行ffmpeg -version命令。
