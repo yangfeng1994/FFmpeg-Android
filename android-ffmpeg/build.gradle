@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.yangfeng1994'
-version = '1.0.5'
+version = '1.1.0'
 
 android {
     compileSdkVersion 28
@@ -9,20 +9,13 @@ android {
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 28
-        versionCode 5
-        versionName "1.0.5"
+        versionCode 10
+        versionName "1.1.0"
     }
 
     buildTypes {
         release {
-            minifyEnabled true
-            jniDebuggable false
-            consumerProguardFiles 'proguard-rules.pro'
-        }
-        debug {
             minifyEnabled false
-            debuggable true
-            jniDebuggable true
             consumerProguardFiles 'proguard-rules.pro'
         }
     }

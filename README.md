@@ -61,11 +61,13 @@ allprojects{
 
 ```
 
+####此版本，优化了代码的逻辑，兼容了低版本的手机，使项目同时兼容androidx与support
+
 app 的 build.gradle 下添加
 
 ```
 dependencies {
-     implementation 'com.github.yangfeng1994:FFmpeg-Android:v1.0.5'
+     implementation 'com.github.yangfeng1994:FFmpeg-Android:v1.1.0'
 }
 ```
 
@@ -146,14 +148,23 @@ ffTask.sendQuitSignal();
 
 注意:这将导致' onFailure '方法被调用，而不是' onSuccess '
 
+
 ####历史版本
+
+
+移除x86 so包，优化项目大小
 
 ```
     implementation 'com.github.yangfeng1994:FFmpeg-Android:v1.0.1'
- 
-    implementation 'com.github.yangfeng1994:FFmpeg-Android:v1.0.0'
     
 ```
+
+新建项目 第一版本
+
+```
+    implementation 'com.github.yangfeng1994:FFmpeg-Android:v1.0.0'
+```
+
 # 体验demo
 
 [点击下载](https://raw.githubusercontent.com/yangfeng1994/FFmpeg-Android/master/sample/release/sample-release.apk)
