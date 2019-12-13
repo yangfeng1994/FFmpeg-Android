@@ -129,10 +129,10 @@ ffmpeg.execute(cmd, new ExecuteBinaryResponseHandler() {
 ```
 
 ### 设置超时时间
-不建议使用超时时间，视频过大，一般执行都比较慢
+不建议使用超时时间，视频过大，一般执行都比较慢,我在项目中没有设置过超时时间
 
 ```
-  ffmpeg.setTimeout(20L);
+  ffmpeg.setTimeout(X毫秒);
 ```
 
 ### 停止(或退出)FFmpeg进程
