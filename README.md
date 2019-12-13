@@ -12,7 +12,7 @@ FFmpeg 在 Android中使用.
 项目支持 androidx 或者 support 
 
 本项目没有引入任何第三方库，不会对您的项目有任何的代码侵入
-使用的是 ProcessBuilder 执行命令行操作 ,可兼容最低api版本为9
+使用的是 ProcessBuilder 执行命令行操作 ,可兼容最低api版本为11
 
 # 项目截图
 
