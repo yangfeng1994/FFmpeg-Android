@@ -1,7 +1,5 @@
 package yf.jackio.ffmpeg;
 
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.os.AsyncTask;
 
 import java.io.BufferedReader;
@@ -11,8 +9,8 @@ import java.io.InputStreamReader;
 
 class Util {
 
-    static boolean isDebug(Context context) {
-        return (context.getApplicationContext().getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+    static boolean isDebug() {
+        return BuildConfig.DEBUG;
     }
 
     static String convertInputStreamToString(InputStream inputStream) {

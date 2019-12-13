@@ -24,12 +24,21 @@ public class FFmpeg implements FFbinaryInterface {
 
     private FFmpeg(FFbinaryContextProvider context) {
         this.context = context;
-        YLog.setDebug(Util.isDebug(this.context.provide()));
+        YLog.setDebug(Util.isDebug());
     }
 
     public static FFmpeg getInstance(final Context context) {
-        if (instance == null) {
-            instance = new FFmpeg(() -> context);
+        if (null == instance) {
+            synchronized (FFmpeg.class) {
+                if (null == instance) {
+                    instance = new FFmpeg(new FFbinaryContextProvider() {
+                        @Override
+                        public Context provide() {
+                            return context;
+                        }
+                    });
+                }
+            }
         }
         return instance;
     }
@@ -38,7 +47,7 @@ public class FFmpeg implements FFbinaryInterface {
     public boolean isSupported() {
         // 检查框架是否支持
         CpuArch cpuArch = CpuArchHelper.getCpuArch();
-        if (cpuArch == CpuArch.NONE || cpuArch == CpuArch.x86) {
+        if (cpuArch == CpuArch.NONE) {
             YLog.e("框架不支持");
             return false;
         }
@@ -141,6 +150,11 @@ public class FFmpeg implements FFbinaryInterface {
         return task != null && task.killRunningProcess();
     }
 
+    /**
+     * 设置超时时间
+     *
+     * @param timeout in milliseconds
+     */
     @Override
     public void setTimeout(long timeout) {
         if (timeout >= MINIMUM_TIMEOUT) {

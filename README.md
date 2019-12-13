@@ -3,12 +3,16 @@
 [![](https://img.shields.io/badge/FFmpeg-4.0-yellow.svg)](http://ffmpeg.org/releases/ffmpeg-4.0.tar.bz2)
 
 
-FFMpeg 在 Android中使用.
+FFmpeg 在 Android中使用.
 在您的Android项目中轻松执行FFmpeg命令。
 
 ## 关于
 引入本项目使您的项目尽可能的小，功能尽可能的完善，已使用本项目上线的项目有 [影音坊](http://server.m.pp.cn/download/apk?appId=8061477&custom=0&ch_src=pp_dev&ch=default)。
 
+项目支持 androidx 或者 support 
+
+本项目没有引入任何第三方库，不会对您的项目有任何的代码侵入
+使用的是 ProcessBuilder 执行命令行操作 ,可兼容最低api版本为9
 
 # 项目截图
 
@@ -45,12 +49,8 @@ FFmpeg-Android运行在以下架构上:
 
 ## 使用
 
-### 开始
-包括依赖
-
-
-allprojects
-{
+```
+allprojects{
 
 	repositories {
 		...
@@ -59,15 +59,22 @@ allprojects
 
 	}
 
-```gradle
-dependencies {
-     implementation 'com.github.yangfeng1994:FFmpeg-Android:v1.0.1'
-}
 ```
 
+gradle
+
+```
+dependencies {
+     implementation 'com.github.yangfeng1994:FFmpeg-Android:v1.0.2'
+}
+```
+#### 友情提示
+1.申请权限（对本地文件处理时，建议您务必申请权限，不然无法对音视频进行操作）
+2.对输入的文件是否存在，进行判断（如您想要输出的文件 已经在手机中存在，将无法对输出文件）
 ### 检查是否支持FFmpeg
 要检查设备上是否有FFmpeg，可以使用以下方法。
-```java
+``` 
+java
 if (FFmpeg.getInstance(this).isSupported()) {
   // 支持ffmpeg
 } else {
@@ -78,7 +85,9 @@ if (FFmpeg.getInstance(this).isSupported()) {
 
 ### 运行 FFmpeg command
 在这个示例代码中，我们将运行ffmpeg -version命令。
-```java
+
+##### java
+```
 FFmpeg ffmpeg = FFmpeg.getInstance(context);
   // 要执行“ffmpeg -version”命令，只需传递“-version”即可
 ffmpeg.execute(cmd, new ExecuteBinaryResponseHandler() {
@@ -101,17 +110,25 @@ ffmpeg.execute(cmd, new ExecuteBinaryResponseHandler() {
 });
 ```
 
+### 设置超时时间
+不建议使用超时时间，视频过大，一般执行都比较慢
+
+```
+  ffmpeg.setTimeout(20L);
+```
+
 ### 停止(或退出)FFmpeg进程
 如果你想停止运行中的ffmpeg, 只需在运行的FFtask上调用' .sendQuitSignal() '
 
-```java
+```
+java
 FFmpeg ffmpeg = FFmpeg.getInstance(context);
 FFtask ffTask = ffmpeg.execute( ... )
 
 ffTask.sendQuitSignal();
 ```
 
-注意:这将导致' onFailure '被调用，而不是' onSuccess ' ._
+注意:这将导致' onFailure '方法被调用，而不是' onSuccess '
 
 # 体验demo
 

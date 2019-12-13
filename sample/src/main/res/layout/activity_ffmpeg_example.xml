@@ -29,6 +29,14 @@
         android:layout_marginBottom="10dp"
         android:text="运行" />
 
+    <Button
+        android:id="@+id/m_get_permissions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:text="获取权限" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

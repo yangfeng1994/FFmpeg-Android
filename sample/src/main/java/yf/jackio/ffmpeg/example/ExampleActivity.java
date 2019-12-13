@@ -52,8 +52,12 @@ public class ExampleActivity extends AppCompatActivity implements View.OnClickLi
         mProgressDialog.setMessage("正在执行命令行");
         mProgressDialog.setProgressNumberFormat("");
         mProgressDialog.setButton("取消", this);
+        //视频长度剪切
+//        String cmd = "-ss 00:00:00 -t 00:00:07 -i /storage/emulated/0/tencent/MicroMsg/WeiXin/wx_camera_1575169611100.mp4 -c:v libx264 -c:a aac -strict experimental -b:a 98k /storage/emulated/0/tencent/MicroMsg/WeiXin/wx_11camera45_abcjfjf.mp4";
         String cmd = mCommand.getText().toString();
-        fftask = FFmpeg.getInstance(this).execute(new String[]{cmd}, new ExecuteBinaryResponseHandler() {
+        FFmpeg ffmpeg = FFmpeg.getInstance(this);
+
+        fftask = ffmpeg.execute(cmd.split(" "), new ExecuteBinaryResponseHandler() {
 
             @Override
             public void onStart() {
@@ -64,13 +68,20 @@ public class ExampleActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onSuccess(String message) {
                 Log.e("yyyy", message);
-                mCommandOutput.setText(message);
+                mCommandOutput.setText("成功" + message);
                 mProgressDialog.dismiss();
             }
 
             @Override
             public void onProgress(String message) {
                 mCommandOutput.setText(message);
+            }
+
+            @Override
+            public void onFailure(String message) {
+                super.onFailure(message);
+                mCommandOutput.setText("失败" + message);
+                mProgressDialog.dismiss();
             }
         });
 
@@ -85,16 +96,16 @@ public class ExampleActivity extends AppCompatActivity implements View.OnClickLi
         final FFtask task = FFmpeg.getInstance(this).execute(command, new ExecuteBinaryResponseHandler() {
             @Override
             public void onStart() {
-                Log.e("yyyy","on start");
+                Log.e("yyyy", "on start");
             }
 
             @Override
             public void onFinish() {
-                Log.e("yyyy","on finish");
+                Log.e("yyyy", "on finish");
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Log.e("yyyy","RESTART RENDERING");
+                        Log.e("yyyy", "RESTART RENDERING");
                         ffmpegTestTaskQuit();
                     }
                 }, 5000);
@@ -102,24 +113,24 @@ public class ExampleActivity extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onSuccess(String message) {
-                Log.e("yyyy",message);
+                Log.e("yyyy", message);
             }
 
             @Override
             public void onProgress(String message) {
-                Log.e("yyyy",message);
+                Log.e("yyyy", message);
             }
 
             @Override
             public void onFailure(String message) {
-                Log.e("yyyy",message);
+                Log.e("yyyy", message);
             }
         });
 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.e("yyyy","STOPPING THE RENDERING!");
+                Log.e("yyyy", "停止执行");
                 task.sendQuitSignal();
             }
         }, 8000);

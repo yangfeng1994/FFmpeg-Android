@@ -1,6 +1,7 @@
 package yf.jackio.ffmpeg;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -115,6 +116,7 @@ class FFcommandExecuteAsyncTask extends AsyncTask<Void, String, CommandResult> i
         }
     }
 
+    @Override
     public boolean isProcessCompleted() {
         return Util.isProcessCompleted(process);
     }

@@ -52,4 +52,5 @@ dependencies {
 
     // FFmpeg project
     implementation project(':android-ffmpeg')
+    implementation 'pub.devrel:easypermissions:3.0.0'
 }
