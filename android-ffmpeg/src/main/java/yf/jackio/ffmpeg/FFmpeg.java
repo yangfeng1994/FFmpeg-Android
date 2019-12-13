@@ -24,7 +24,7 @@ public class FFmpeg implements FFbinaryInterface {
 
     private FFmpeg(FFbinaryContextProvider context) {
         this.context = context;
-        YLog.setDebug(Util.isDebug());
+        YLog.setDebug(Util.isDebug(context.provide()));
     }
 
     public static FFmpeg getInstance(final Context context) {
