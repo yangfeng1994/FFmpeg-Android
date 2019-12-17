@@ -16,10 +16,10 @@ FFmpeg 在 Android中使用.
 
 # 项目截图
 
-<img src="/sample/imgs/ffmpeg_version.jpg" alt="图-1：ffmpeg_version" width="380px",height=600px></img>
-<img src="/sample/imgs/cmd.jpg" alt="图-2：cmd" width="380px",height=600px></img>
-<img src="/sample/imgs/multiple_video.jpg" alt="图-3：cmd" width="380px",height=600px></img>
-<img src="/sample/imgs/ic_picInPic.jpg" alt="图-3：cmd" width="380px",height=600px></img>
+<img src="/sample/imgs/ffmpeg_version.jpg" alt="图-1：ffmpeg_version" width="380px"></img>
+<img src="/sample/imgs/cmd.jpg" alt="图-2：cmd" width="380px"></img>
+<img src="/sample/imgs/multiple_video.jpg" alt="图-3：cmd" width="380px"></img>
+<img src="/sample/imgs/ic_picInPic.jpg" alt="图-3：cmd" width="380px"></img>
 
 ### 体系结构
 FFmpeg-Android运行在以下架构上:
