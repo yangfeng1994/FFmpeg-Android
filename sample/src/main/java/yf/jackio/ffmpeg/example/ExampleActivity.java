@@ -1,7 +1,9 @@
 package yf.jackio.ffmpeg.example;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -11,6 +13,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.source.ProgressiveMediaSource;
+import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import yf.jackio.ffmpeg.ExecuteBinaryResponseHandler;
 import yf.jackio.ffmpeg.FFmpeg;
@@ -25,6 +43,8 @@ public class ExampleActivity extends AppCompatActivity implements View.OnClickLi
     private Button mRunCommand;
     private EditText mCommand;
     private FFtask fftask;
+    private PlayerView mPlayerView;
+    private SimpleExoPlayer exoPlayer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +53,11 @@ public class ExampleActivity extends AppCompatActivity implements View.OnClickLi
         mCommandOutput = findViewById(R.id.command_output);
         mRunCommand = findViewById(R.id.run_command);
         mCommand = findViewById(R.id.command);
+        mPlayerView = findViewById(R.id.mPlayerView);
         mRunCommand.setOnClickListener(this);
+        File cache = getCacheDir();
+        deleteDirs(cache);
+        initExoVideo();
     }
 
     private void runCmd() {
@@ -47,14 +71,58 @@ public class ExampleActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * 读取流到文件中
+     *
+     * @param context
+     * @param resourceId
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    private static File redRawToFile(Context context, int resourceId, File file) throws IOException {
+        final InputStream inputStream = context.getResources().openRawResource(resourceId);
+        if (file.exists()) {
+            file.delete();
+        }
+        final FileOutputStream outputStream = new FileOutputStream(file);
+        try {
+            final byte[] buffer = new byte[1024];
+            int readSize;
+
+            while ((readSize = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, readSize);
+            }
+        } catch (final IOException e) {
+            Log.e("yyyy", "Saving raw resource failed.", e);
+            return file;
+        } finally {
+            inputStream.close();
+            outputStream.flush();
+            outputStream.close();
+            return file;
+        }
+    }
+
     private void versionFFmpeg() {
         ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("正在执行命令行");
         mProgressDialog.setProgressNumberFormat("");
         mProgressDialog.setButton("取消", this);
+        File cache = getCacheDir();
+        File file = new File(cache, "video_demo.mp4");
+        File tempFile = new File(cache, "result_video.mp4");
+
+        File file1 = null;
+        try {
+            file1 = redRawToFile(this, R.raw.video_demo, file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         //视频长度剪切
-//        String cmd = "-ss 00:00:00 -t 00:00:07 -i /storage/emulated/0/tencent/MicroMsg/WeiXin/wx_camera_1575169611100.mp4 -c:v libx264 -c:a aac -strict experimental -b:a 98k /storage/emulated/0/tencent/MicroMsg/WeiXin/wx_11camera45_abcjfjf.mp4";
-        String cmd = mCommand.getText().toString();
+        String cmd = String.format("-ss 00:00:00 -t 00:00:07 -i %s -c:v libx264 -c:a aac -strict experimental -b:a 98k %s", file1, tempFile);
+//        String cmd = mCommand.getText().toString();
         FFmpeg ffmpeg = FFmpeg.getInstance(this);
 
         fftask = ffmpeg.execute(cmd.split(" "), new ExecuteBinaryResponseHandler() {
@@ -70,6 +138,7 @@ public class ExampleActivity extends AppCompatActivity implements View.OnClickLi
                 Log.e("yyyy", message);
                 mCommandOutput.setText("成功" + message);
                 mProgressDialog.dismiss();
+                setVideo(tempFile);
             }
 
             @Override
@@ -84,7 +153,34 @@ public class ExampleActivity extends AppCompatActivity implements View.OnClickLi
                 mProgressDialog.dismiss();
             }
         });
+    }
 
+    public static boolean deleteDirs(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDirs(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+        return dir.delete();
+    }
+
+    private void initExoVideo() {
+        exoPlayer = new SimpleExoPlayer.Builder(this).build();
+    }
+
+    private void setVideo(File file) {
+        mPlayerView.setVisibility(View.VISIBLE);
+        DefaultBandwidthMeter meter = new DefaultBandwidthMeter.Builder(this).build();
+        DefaultDataSourceFactory defaultDataSourceFactory = new DefaultDataSourceFactory(this, Util.getUserAgent(this, getString(R.string.app_name)), meter);
+        Uri parse = Uri.fromFile(file);
+        ProgressiveMediaSource mediaSource = new ProgressiveMediaSource.Factory(defaultDataSourceFactory).createMediaSource(parse);
+        exoPlayer.prepare(mediaSource);
+        mPlayerView.setPlayer(exoPlayer);
+        exoPlayer.setPlayWhenReady(true);
     }
 
     /**
