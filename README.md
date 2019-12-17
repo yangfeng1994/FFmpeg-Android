@@ -79,7 +79,7 @@ dependencies {
 android{
         defaultConfig{
          ndk {
-                    abiFilters 'armeabi-v7a', 'armeabi'     //过滤的so库版本
+                    abiFilters 'armeabi-v7a', 'arm64-v8a'     //过滤的so库版本
                 }
         }
 }
