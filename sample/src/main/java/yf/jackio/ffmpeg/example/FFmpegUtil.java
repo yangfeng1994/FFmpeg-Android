@@ -7,7 +7,6 @@ import java.util.Locale;
 
 /**
  * ffmpeg工具：拼接命令行处理音视频
- * Created by frank on 2018/1/23.
  */
 
 public class FFmpegUtil {
@@ -83,7 +82,7 @@ public class FFmpegUtil {
      * @param audioFile 音频文件
      * @param duration  视频时长
      * @param muxFile   目标文件
-     * @return 合成后的文件
+     * @return 合成后的命令行
      */
     @SuppressLint("DefaultLocale")
     public static String[] mediaMux(String videoFile, String audioFile, int duration, String muxFile) {
@@ -98,7 +97,7 @@ public class FFmpegUtil {
      *
      * @param srcFile    原文件
      * @param targetFile 目标文件
-     * @return 抽取后的音频文件
+     * @return 需要执行命令行
      */
     public static String[] extractAudio(String srcFile, String targetFile) {
         //-vn:video not
@@ -112,7 +111,7 @@ public class FFmpegUtil {
      *
      * @param srcFile    原文件
      * @param targetFile 目标文件
-     * @return 抽取后的视频文件
+     * @return 需要执行命令行
      */
     public static String[] extractVideo(String srcFile, String targetFile) {
         //-an audio not
@@ -127,7 +126,7 @@ public class FFmpegUtil {
      *
      * @param srcFile    源文件
      * @param targetFile 目标文件（后缀指定转码格式）
-     * @return 转码后的文件
+     * @return 需要执行命令行
      */
     public static String[] transformVideo(String srcFile, String targetFile) {
         //指定目标视频的帧率、码率、分辨率
@@ -142,12 +141,12 @@ public class FFmpegUtil {
      *
      * @param srcFile    源文件
      * @param startTime  剪切的开始时间(单位为秒)
-     * @param duration   结束时间
+     * @param endTime   结束时间
      * @param targetFile 目标文件
      * @return 返回的命令行
      */
     @SuppressLint("DefaultLocale")
-    public static String[] cutVideo(String srcFile, int startTime, int endTime, String targetFile) {
+    public static String[] cutVideo(String srcFile, String startTime, String endTime, String targetFile) {
         String cutVideoCmd = "-ss %s -t %s -i %s -c:v libx264 -c:a aac -strict experimental -b:a 98k %s";
         cutVideoCmd = String.format(cutVideoCmd, startTime, endTime, srcFile, targetFile);
         return cutVideoCmd.split(" ");//以空格分割为字符串数组
@@ -159,7 +158,7 @@ public class FFmpegUtil {
      * @param srcFile    源文件
      * @param size       图片尺寸大小
      * @param targetFile 目标文件
-     * @return 截图后的文件
+     * @return 需要执行命令行
      */
     public static String[] screenShot(String srcFile, String size, String targetFile) {
         String screenShotCmd = "-i %s -f image2 -t 0.001 -s %s %s";
@@ -173,7 +172,7 @@ public class FFmpegUtil {
      * @param srcFile    源文件
      * @param waterMark  水印文件路径
      * @param targetFile 目标文件
-     * @return 添加水印后的文件
+     * @return 需要执行命令行
      */
     public static String[] addWaterMark(String srcFile, String waterMark, String targetFile) {
         String waterMarkCmd = "-i %s -i %s -filter_complex overlay=0:0 %s";
@@ -188,7 +187,7 @@ public class FFmpegUtil {
      * @param startTime  开始时间
      * @param duration   截取时长
      * @param targetFile 目标文件
-     * @return Gif文件
+     * @return 需要执行命令行
      */
     @SuppressLint("DefaultLocale")
     public static String[] generateGif(String srcFile, int startTime, int duration, String targetFile) {
@@ -204,7 +203,7 @@ public class FFmpegUtil {
      * @param size       视频尺寸大小
      * @param recordTime 录屏时间
      * @param targetFile 目标文件
-     * @return 屏幕录制文件
+     * @return 需要执行命令行
      */
     @SuppressLint("DefaultLocale")
     public static String[] screenRecord(String size, int recordTime, String targetFile) {
@@ -221,7 +220,7 @@ public class FFmpegUtil {
      *
      * @param srcFile    源文件
      * @param targetFile 目标文件(mpg格式)
-     * @return 合成的视频文件
+     * @return 需要执行命令行
      */
     @SuppressLint("DefaultLocale")
     public static String[] pictureToVideo(String srcFile, String targetFile) {

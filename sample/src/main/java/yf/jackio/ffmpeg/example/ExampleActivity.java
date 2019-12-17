@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -29,6 +30,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 
 import yf.jackio.ffmpeg.ExecuteBinaryResponseHandler;
 import yf.jackio.ffmpeg.FFmpeg;
@@ -45,6 +47,9 @@ public class ExampleActivity extends AppCompatActivity implements View.OnClickLi
     private FFtask fftask;
     private PlayerView mPlayerView;
     private SimpleExoPlayer exoPlayer;
+    File tempFile;
+    File file1;
+    String[] cmd;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +61,23 @@ public class ExampleActivity extends AppCompatActivity implements View.OnClickLi
         mPlayerView = findViewById(R.id.mPlayerView);
         mRunCommand.setOnClickListener(this);
         File cache = getCacheDir();
-        deleteDirs(cache);
+        long time = System.currentTimeMillis();
+        File file = new File(cache, "video_demo" + time + ".mp4");
+        tempFile = new File(cache, "result_video" + time + ".mp4");
+        try {
+            file1 = redRawToFile(this, R.raw.video_demo, file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //视频叠加成画中画
+//        cmd = FFmpegUtil.picInPicVideo(file1.getAbsolutePath(), file1.getAbsolutePath(), 100, 100, tempFile.getAbsolutePath());
+        //视频长度剪切
+//        cmd = FFmpegUtil.cutVideo(file1.getAbsolutePath(), "00:00:00", "00:00:07", tempFile.getAbsolutePath());
+        //多画面拼接视频
+        cmd = FFmpegUtil.multiVideo(file1.getAbsolutePath(), file1.getAbsolutePath(), tempFile.getAbsolutePath(), FFmpegUtil.LAYOUT_HORIZONTAL);
+//        cmd = new String[]{"-version"};
+        String s = Arrays.toString(cmd).replace("[", "").replace("]", "").replace(",", " ");
+        mCommand.setText(s);
         initExoVideo();
     }
 
@@ -109,23 +130,11 @@ public class ExampleActivity extends AppCompatActivity implements View.OnClickLi
         mProgressDialog.setMessage("正在执行命令行");
         mProgressDialog.setProgressNumberFormat("");
         mProgressDialog.setButton("取消", this);
-        File cache = getCacheDir();
-        File file = new File(cache, "video_demo.mp4");
-        File tempFile = new File(cache, "result_video.mp4");
-
-        File file1 = null;
-        try {
-            file1 = redRawToFile(this, R.raw.video_demo, file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //视频长度剪切
-        String cmd = String.format("-ss 00:00:00 -t 00:00:07 -i %s -c:v libx264 -c:a aac -strict experimental -b:a 98k %s", file1, tempFile);
-//        String cmd = mCommand.getText().toString();
+        String s = Arrays.toString(cmd).replace("[", "").replace("]", "").replace(",", " ");
+        mCommand.setText(s);
         FFmpeg ffmpeg = FFmpeg.getInstance(this);
 
-        fftask = ffmpeg.execute(cmd.split(" "), new ExecuteBinaryResponseHandler() {
+        fftask = ffmpeg.execute(cmd, new ExecuteBinaryResponseHandler() {
 
             @Override
             public void onStart() {
@@ -153,19 +162,6 @@ public class ExampleActivity extends AppCompatActivity implements View.OnClickLi
                 mProgressDialog.dismiss();
             }
         });
-    }
-
-    public static boolean deleteDirs(File dir) {
-        if (dir != null && dir.isDirectory()) {
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDirs(new File(dir, children[i]));
-                if (!success) {
-                    return false;
-                }
-            }
-        }
-        return dir.delete();
     }
 
     private void initExoVideo() {

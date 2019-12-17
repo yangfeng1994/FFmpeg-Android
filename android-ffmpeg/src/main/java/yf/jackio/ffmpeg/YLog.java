@@ -2,7 +2,7 @@ package yf.jackio.ffmpeg;
 
 import android.util.Log;
 
-class YLog {
+ class YLog {
 
     private static String TAG = FFmpeg.class.getSimpleName();
     private static boolean DEBUG = false;
