@@ -1,6 +1,7 @@
 package yf.jackio.ffmpeg;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,14 +45,14 @@ class FFcommandExecuteAsyncTask extends AsyncTask<Void, String, CommandResult> i
             if (process == null) {
                 return CommandResult.getDummyFailureResponse();
             }
-            Log.d("Running publishing updates method");
+            YLog.d("Running publishing updates method");
             checkAndUpdateProcess();
             return CommandResult.getOutputFromProcess(process);
         } catch (TimeoutException e) {
-            Log.e("FFmpeg binary timed out", e);
+            YLog.e("FFmpeg binary timed out", e);
             return new CommandResult(false, e.getMessage());
         } catch (Exception e) {
-            Log.e("Error running FFmpeg binary", e);
+            YLog.e("Error running FFmpeg binary", e);
         } finally {
             Util.destroyProcess(process);
         }
@@ -80,8 +81,7 @@ class FFcommandExecuteAsyncTask extends AsyncTask<Void, String, CommandResult> i
 
     private void checkAndUpdateProcess() throws TimeoutException, InterruptedException {
         while (!Util.isProcessCompleted(process)) {
-
-            // checking if process is completed
+            // 检测流程是否完成
             if (Util.isProcessCompleted(process)) {
                 return;
             }
@@ -116,6 +116,7 @@ class FFcommandExecuteAsyncTask extends AsyncTask<Void, String, CommandResult> i
         }
     }
 
+    @Override
     public boolean isProcessCompleted() {
         return Util.isProcessCompleted(process);
     }

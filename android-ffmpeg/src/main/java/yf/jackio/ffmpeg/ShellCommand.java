@@ -14,7 +14,7 @@ class ShellCommand {
             }
             process = processBuilder.start();
         } catch (Throwable t) {
-            Log.e("Exception while trying to run: " + Arrays.toString(commandString), t);
+            YLog.e("Exception while trying to run: " + Arrays.toString(commandString), t);
         }
         return process;
     }

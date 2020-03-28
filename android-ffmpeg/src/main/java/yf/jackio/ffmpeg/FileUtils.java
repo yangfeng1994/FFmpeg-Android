@@ -11,18 +11,18 @@ import java.io.OutputStream;
 
 class FileUtils {
     private static final String FFMPEG_FILE_NAME = "ffmpeg";
-    private static final String FFPROBE_FILE_NAME = "ffprobe";
 
     static File getFFmpeg(Context context) {
         File folder = context.getFilesDir();
         return new File(folder, FFMPEG_FILE_NAME);
     }
 
-    static File getFFprobe(Context context) {
-        File folder = context.getFilesDir();
-        return new File(folder, FFPROBE_FILE_NAME);
-    }
-
+    /**
+     * 将asset中的ffmpeg写入文件中
+     * @param stream
+     * @param file
+     * @return 是否写入成功
+     */
     static boolean inputStreamToFile(InputStream stream, File file) {
         try {
             InputStream input = new BufferedInputStream(stream);
@@ -37,7 +37,7 @@ class FileUtils {
             input.close();
             return true;
         } catch (IOException e) {
-            Log.e("error while writing ff binary file", e);
+            YLog.e("error while writing ff binary file", e);
         }
         return false;
     }
