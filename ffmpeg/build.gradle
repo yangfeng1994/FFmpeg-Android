@@ -1,0 +1,36 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.github.yangfeng1994'
+version = '2.0.0'
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 29
+        versionCode 20
+        versionName "2.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ["libs"]
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}

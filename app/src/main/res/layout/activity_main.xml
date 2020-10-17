@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/run_command"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="运行" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e6e6e6" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/mPlayerView"
+                android:layout_width="match_parent"
+                android:layout_height="600dp"
+                android:background="#000000"
+                android:visibility="gone"
+                app:ad_marker_color="#000000" />
+
+            <TextView
+                android:id="@+id/command_output"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="12dp"
+                android:paddingRight="10dp" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

@@ -10,7 +10,7 @@
     </FlexmarkHtmlSettings>
   </component>
   <component name="MarkdownProjectSettings">
-    <PreviewSettings splitEditorLayout="SPLIT" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" synchronizePreviewPosition="true" highlightPreviewType="NONE" highlightFadeOut="5" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="false" showSelectionInPreview="true" lastLayoutSetsDefault="false">
+    <PreviewSettings splitEditorLayout="SPLIT" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="5" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" lastLayoutSetsDefault="false">
       <PanelProvider>
         <provider providerId="com.vladsch.md.nav.editor.swing.html.panel" providerName="Default - Swing" />
       </PanelProvider>
@@ -19,7 +19,6 @@
       <PegdownExtensions>
         <option name="ANCHORLINKS" value="true" />
         <option name="ATXHEADERSPACE" value="true" />
-        <option name="AUTOLINKS" value="true" />
         <option name="FENCED_CODE_BLOCKS" value="true" />
         <option name="INTELLIJ_DUMMY_IDENTIFIER" value="true" />
         <option name="RELAXEDHRULES" value="true" />
@@ -35,18 +34,18 @@
         <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
       </ParserOptions>
     </ParserSettings>
-    <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" addPageHeader="true" imageUriSerials="false" addDocTypeHtml="true" noParaTags="false" plantUmlConversion="0">
+    <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" addPageHeader="false" imageUriSerials="false" addDocTypeHtml="true" noParaTags="false" plantUmlConversion="0">
       <GeneratorProvider>
-        <provider providerId="com.vladsch.md.nav.editor.swing.html.generator" providerName="Default Swing HTML Generator" />
+        <provider providerId="com.vladsch.md.nav.editor.text.html.generator" providerName="Unmodified HTML Generator" />
       </GeneratorProvider>
       <headerTop />
       <headerBottom />
       <bodyTop />
       <bodyBottom />
     </HtmlSettings>
-    <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="false" isCssTextEnabled="false" isDynamicPageWidth="true">
+    <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="false" isDynamicPageWidth="true">
       <StylesheetProvider>
-        <provider providerId="com.vladsch.md.nav.editor.swing.html.css" providerName="Default Swing Stylesheet" />
+        <provider providerId="com.vladsch.md.nav.editor.text.html.css" providerName="No Stylesheet" />
       </StylesheetProvider>
       <ScriptProviders />
       <cssText />

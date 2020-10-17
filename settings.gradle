@@ -1,1 +1,2 @@
-include ':sample', ':android-ffmpeg'
+include ':app', ':ffmpeg'
+rootProject.name='android-ffmpeg'
