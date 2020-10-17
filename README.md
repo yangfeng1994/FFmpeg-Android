@@ -142,18 +142,29 @@ android{
 	
     asyncTask.setCallback(object :FFmpegExecuteCallback{
            
-		   	override fun onFFmpegStart() {}
+		   	override fun onFFmpegStart() {
+		   	
+		   	}
 			
 		   	override fun onFFmpegProgress(progress: Int?) {
+		   	
        			//注意kotlin的除法，建议转为float后，再进行除以
+       			
 				val mprogress = progress?.div(执行视频文件或语音文件时长)	
+				
     			}
 				
- 			override fun onFFmpegCancel() {}
+ 			override fun onFFmpegCancel() {
+ 			
+ 			}
 
-    		override fun onFFmpegSucceed(executeOutput: String?) {}
+    		override fun onFFmpegSucceed(executeOutput: String?) {
+    		
+    		}
 
-			override fun onFFmpegFailed(executeOutput: String?) {}
+			override fun onFFmpegFailed(executeOutput: String?) {
+			
+			}
 
         })
 		
