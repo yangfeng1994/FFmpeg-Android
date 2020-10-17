@@ -63,7 +63,7 @@ app 的 build.gradle 下添加
 
 ```
 dependencies {
-     implementation 'com.github.yangfeng1994:FFmpeg-Android:v2.0.0'
+     implementation 'com.github.yangfeng1994:FFmpeg-Android:v2.0.1'
 }
 ```
 

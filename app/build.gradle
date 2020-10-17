@@ -51,7 +51,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation project(path: ':ffmpeg')
+//    implementation project(path: ':ffmpeg')
+    implementation 'com.github.yangfeng1994:FFmpeg-Android:v2.0.1'
     implementation 'com.google.android.exoplayer:exoplayer-core:2.11.0'
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.11.0'
 }
