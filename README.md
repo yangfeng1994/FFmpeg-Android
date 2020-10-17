@@ -42,7 +42,7 @@ allprojects{
 
 	repositories {
 		...
-		maven { url 'https://www.jitpack.io' }
+		maven { url 'https://jitpack.io' }
 		}
 
 	}
